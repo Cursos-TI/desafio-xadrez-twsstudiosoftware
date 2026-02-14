@@ -18,7 +18,7 @@ int main() {
        Direção: 5 casas para a direita
        =============================== */
        
-    int casasTorre = 5;
+      int casasTorre = 5;
 
     printf("Movimento da Torre:\n");
 
@@ -62,6 +62,38 @@ int main() {
         printf("Esquerda\n");
         contadorRainha++;
     } while (contadorRainha <= casasRainha);
+
+    printf("\n");
+
+    /* ===============================
+       Movimento do CAVALO
+       Estruturas: loops aninhados
+       - for (obrigatório)
+       - while
+       Movimento em "L":
+       2 casas para baixo
+       1 casa para a esquerda
+       =============================== */
+
+    int casasBaixo = 2;
+    int casasEsquerda = 1;
+
+    printf("Movimento do Cavalo:\n");
+
+    /* Loop for controla o movimento vertical */
+    for (int i = 1; i <= casasBaixo; i++) {
+        printf("Baixo\n");
+
+        /* Loop while controla o movimento horizontal
+           Executa apenas após o último movimento para baixo */
+        if (i == casasBaixo) {
+            int contadorEsquerda = 1;
+            while (contadorEsquerda <= casasEsquerda) {
+                printf("Esquerda\n");
+                contadorEsquerda++;
+            }
+        }
+    }
 
     return 0;
 }
