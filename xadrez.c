@@ -4,7 +4,7 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
 // O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
 
-int main() {
+
    
     // Nível Mestre - Funções Recursivas e Loops Aninhados
     // Sugestão: Substitua as movimentações das peças por funções recursivas.
@@ -18,82 +18,116 @@ int main() {
        Direção: 5 casas para a direita
        =============================== */
        
-      int casasTorre = 5;
-
-    printf("Movimento da Torre:\n");
-
-    for (int i = 1; i <= casasTorre; i++) {
-        printf("Direita\n");
+     /* ===============================
+       Função recursiva da TORRE
+       Movimento: Direita
+    =============================== */
+void moverTorre(int casas) {
+    if (casas == 0) {
+        return;
     }
 
-    printf("\n");
+    printf("Direita\n");
+    moverTorre(casas - 1);
+}
 
-    /* ===============================
-       Movimento do BISPO
-       Estrutura: while
-       Direção: 5 casas na diagonal
-       (Cima e Direita)
-       =============================== */
-
-    int casasBispo = 5;
-    int contadorBispo = 1;
-
-    printf("Movimento do Bispo:\n");
-
-    while (contadorBispo <= casasBispo) {
-        printf("Cima Direita\n");
-        contadorBispo++;
+/* ===============================
+   Função recursiva da RAINHA
+   Movimento: Esquerda
+   =============================== */
+void moverRainha(int casas) {
+    if (casas == 0) {
+        return;
     }
 
-    printf("\n");
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
 
-    /* ===============================
-       Movimento da RAINHA
-       Estrutura: do-while
-       Direção: 8 casas para a esquerda
-       =============================== */
+/* ===============================
+   Função do BISPO
+   - Recursividade
+   - Loops aninhados
+   Loop externo: vertical
+   Loop interno: horizontal
+   Movimento: Cima + Direita
+   =============================== */
+void moverBispo(int casas) {
+    if (casas == 0) {
+        return;
+    }
 
-    int casasRainha = 8;
-    int contadorRainha = 1;
+    /* Loop externo controla o movimento vertical */
+    for (int vertical = 1; vertical <= 1; vertical++) {
 
-    printf("Movimento da Rainha:\n");
+        /* Loop interno controla o movimento horizontal */
+        for (int horizontal = 1; horizontal <= 1; horizontal++) {
+            printf("Cima Direita\n");
+        }
+    }
 
-    do {
-        printf("Esquerda\n");
-        contadorRainha++;
-    } while (contadorRainha <= casasRainha);
+    moverBispo(casas - 1);
+}
 
-    printf("\n");
+/* ===============================
+   Função do CAVALO
+   Loops complexos aninhados
+   Movimento em "L":
+   2 casas para cima
+   1 casa para a direita
+   =============================== */
+void moverCavalo() {
 
-    /* ===============================
-       Movimento do CAVALO
-       Estruturas: loops aninhados
-       - for (obrigatório)
-       - while
-       Movimento em "L":
-       2 casas para baixo
-       1 casa para a esquerda
-       =============================== */
+    int movimentosVerticais = 2;
+    int movimentosHorizontais = 1;
 
-    int casasBaixo = 2;
-    int casasEsquerda = 1;
+    /* Loop externo controla o eixo vertical */
+    for (int v = 1; v <= movimentosVerticais; v++) {
 
-    printf("Movimento do Cavalo:\n");
+        /* Condição extra apenas para exemplo de controle */
+        if (v < 0) {
+            continue; // nunca entra, mas demonstra uso
+        }
 
-    /* Loop for controla o movimento vertical */
-    for (int i = 1; i <= casasBaixo; i++) {
-        printf("Baixo\n");
+        printf("Cima\n");
 
-        /* Loop while controla o movimento horizontal
-           Executa apenas após o último movimento para baixo */
-        if (i == casasBaixo) {
-            int contadorEsquerda = 1;
-            while (contadorEsquerda <= casasEsquerda) {
-                printf("Esquerda\n");
-                contadorEsquerda++;
+        /* Após completar o movimento vertical,
+           executa o movimento horizontal */
+        if (v == movimentosVerticais) {
+
+            int h = 1;
+            while (h <= movimentosHorizontais) {
+                printf("Direita\n");
+
+                /* Controle explícito de fluxo */
+                if (h == movimentosHorizontais) {
+                    break;
+                }
+
+                h++;
             }
         }
     }
+}
+
+int main() {
+
+    /* Quantidade de casas definidas no código */
+    int casasTorre = 5;
+    int casasBispo = 5;
+    int casasRainha = 8;
+
+    printf("Movimento da Torre:\n");
+    moverTorre(casasTorre);
+
+    printf("\nMovimento do Bispo:\n");
+    moverBispo(casasBispo);
+
+    printf("\nMovimento da Rainha:\n");
+    moverRainha(casasRainha);
+
+    printf("\nMovimento do Cavalo:\n");
+    moverCavalo();
 
     return 0;
 }
